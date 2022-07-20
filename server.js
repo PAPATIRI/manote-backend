@@ -9,13 +9,13 @@ const cors = require("cors");
 const notesRouter = require("./routes/notes");
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 
 dotenv.config();
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(process.env.MONGODB_URL, {
     useUnifiedTopology: true,
   })
   .then(() => console.log("connected to mongo db"))
