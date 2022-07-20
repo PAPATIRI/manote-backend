@@ -15,7 +15,7 @@ exports.addNote = async (req, res) => {
 //get all notes
 exports.getAllNote = async (req, res) => {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find().sort({ _id: -1 });
     res.status(200).json(notes);
   } catch (err) {
     res.status(500).json(err);

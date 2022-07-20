@@ -4,11 +4,14 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const helmet = require("helmet");
+const cors = require("cors");
 //use route
 const notesRouter = require("./routes/notes");
 
 const app = express();
 const port = 3001;
+
+app.use(cors());
 
 dotenv.config();
 mongoose
