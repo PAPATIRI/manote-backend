@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
+const { logger } = require("./utils/logger");
+const winston = require("winston");
 //use route
 const notesRouter = require("./routes/notes");
 
@@ -29,6 +31,13 @@ app.use(morgan("common"));
 // router
 app.use("/api", notesRouter);
 
+if (process.env.NODE_ENV !== "production") {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple(),
+    })
+  );
+}
 app.listen(port, () => {
-  console.log(`REST API listening at http://localhost:${port}`);
+  logger.info(`REST API listening at http://localhost:${port}`);
 });
